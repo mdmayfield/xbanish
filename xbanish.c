@@ -136,7 +136,9 @@ main(int argc, char *argv[])
 					    e.xkey.keycode);
 				break;
 			}
-
+			if (debug)
+				printf("keystroke %d, %shiding cursor\n",
+				    e.xkey.keycode, (hiding ? "already " : ""));
 			hide_cursor();
 			break;
 
@@ -191,10 +193,6 @@ main(int argc, char *argv[])
 void
 hide_cursor(void)
 {
-	if (debug)
-		printf("keystroke, %shiding cursor\n",
-		    (hiding ? "already " : ""));
-
 	if (!hiding) {
 		XFixesHideCursor(dpy, DefaultRootWindow(dpy));
 		hiding = 1;
